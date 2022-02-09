@@ -1,0 +1,80 @@
+CREATE TABLE UserDbModel(
+    cell TEXT NOT NULL,
+    dob_age INTEGER NOT NULL,
+    dob_date TEXT NOT NULL,
+    email TEXT NOT NULL,
+    gender TEXT NOT NULL,
+    id_name TEXT NOT NULL,
+    id_value TEXT NOT NULL,
+    location_city TEXT NOT NULL,
+    location_coordinates_latitude TEXT NOT NULL,
+    location_coordinates_longitude TEXT NOT NULL,
+    location_postcode TEXT NOT NULL,
+    location_state TEXT NOT NULL,
+    location_street_number INTEGER NOT NULL,
+    location_street_name TEXT NOT NULL,
+    location_timezone_description TEXT NOT NULL,
+    location_timezone_offset TEXT NOT NULL,
+    login_md5 TEXT NOT NULL,
+    login_password TEXT NOT NULL,
+    login_salt TEXT NOT NULL,
+    login_sha1 TEXT NOT NULL,
+    login_sha256 TEXT NOT NULL,
+    login_username TEXT NOT NULL,
+    login_uuid TEXT PRIMARY KEY NOT NULL,
+    name_first TEXT NOT NULL,
+    name_last TEXT NOT NULL,
+    name_title TEXT NOT NULL,
+    nat TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    picture_large TEXT NOT NULL,
+    picture_medium TEXT NOT NULL,
+    picture_thumbnail TEXT NOT NULL,
+    registered_age INTEGER NOT NULL,
+    registered_date TEXT NOT NULL
+);
+
+getUser:
+SELECT *
+FROM UserDbModel
+WHERE login_uuid=?;
+
+saveOrUpdateUser:
+INSERT INTO UserDbModel
+VALUES :user
+ON CONFLICT(login_uuid) DO
+UPDATE SET cell=excluded.cell,
+dob_age=excluded.dob_age,
+dob_date=excluded.dob_date,
+email=excluded.email,
+gender=excluded.gender,
+id_name=excluded.id_name,
+id_value=excluded.id_value,
+location_city=excluded.location_city,
+location_coordinates_latitude=excluded.location_coordinates_latitude,
+location_coordinates_longitude=excluded.location_coordinates_longitude,
+location_postcode=excluded.location_postcode,
+location_state=excluded.location_state,
+location_street_name=excluded.location_street_name,
+location_street_number=excluded.location_street_number,
+location_timezone_description=excluded.location_timezone_description,
+location_timezone_offset=excluded.location_timezone_offset,
+login_md5=excluded.login_md5,
+login_salt=excluded.login_salt,
+login_sha1=excluded.login_sha1,
+login_sha256=excluded.login_sha256,
+login_username=excluded.login_username,
+login_uuid=excluded.login_uuid,
+name_first=excluded.name_first,
+name_last=excluded.name_last,
+name_title=excluded.name_title,
+nat=excluded.nat,
+phone=excluded.phone,
+picture_large=excluded.picture_large,
+picture_medium=excluded.picture_medium,
+picture_thumbnail=excluded.picture_thumbnail,
+registered_age=excluded.registered_age,
+registered_date=excluded.registered_date;
+
+deleteAll:
+DELETE FROM UserDbModel;
