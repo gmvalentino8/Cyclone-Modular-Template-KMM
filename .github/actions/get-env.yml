@@ -1,0 +1,8 @@
+name: 'Get environment variables'
+description: 'Configures environment variables for a workflow'
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        sed "" ./.github/env/variables.env >> $GITHUB_ENV
+      shell: bash

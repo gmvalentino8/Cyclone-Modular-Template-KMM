@@ -5,19 +5,20 @@ on:
     branches:
       - '*'
 
-env:
-  VERSION: $(git fetch --tags --quiet && git describe --tags --always --first-parent)
 jobs:
   setup:
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.GetVersion.outputs.version }}
     steps:
       - uses: actions/checkout@v2
-      - name: Print Version
-        run : echo ${{ env.VERSION }}
+      - name: Set Version
+        uses: ./.github/actions/set-env
+        with:
+          name: VERSION
+          value: $(git fetch --tags --quiet && git describe --tags --always --first-parent)
   job2:
     runs-on: ubuntu-latest
     steps:
+      - name: Get Version
+        uses: ./.github/actions/get-env
       - name: Print Version
-        run : echo ${{ env.VERSION }}
+        run: echo ${{ env.VERSION }}

@@ -1,0 +1,15 @@
+name: 'Set environment variables'
+description: 'Configures environment variables for a workflow'
+inputs:
+  name:
+    description: 'Name of the variable'
+    required: true
+  value:
+    description: 'Value of the variable'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        cat ${{ inputs.name }}=${{ inputs.value }} >> ./.github/env/variables.env
+      shell: bash
