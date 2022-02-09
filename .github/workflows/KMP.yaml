@@ -10,11 +10,10 @@ jobs:
       version: ${{ steps.GetVersion.outputs.version }}
     steps:
       - uses: actions/checkout@v2
-      - id: GetVersion
-        run: |
-          echo "::set-output name=version::$(git fetch --tags --quiet && git describe --tags --always --first-parent)"
+      - name: Set Version
+        run: echo "VERSION=$(git fetch --tags --quiet && git describe --tags --always --first-parent)" >> $GITHUB_ENV
   job2:
     runs-on: ubuntu-latest
     steps:
       - name: Print Version
-        run : echo ${{needs.setup.outputs.version}}
+        run : echo ${{ env.VERSION }}
