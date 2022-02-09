@@ -11,5 +11,6 @@ runs:
   using: "composite"
   steps:
     - run: |
-        cat ${{ inputs.name }}=${{ inputs.value }} >> .github/env/variables.env
+        touch ./.github/env/variables.env
+        cat ${{ inputs.name }}=${{ inputs.value }} >> ./.github/env/variables.env
       shell: bash

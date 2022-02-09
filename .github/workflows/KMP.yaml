@@ -16,6 +16,7 @@ jobs:
           name: VERSION
           value: $(git fetch --tags --quiet && git describe --tags --always --first-parent)
   job2:
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Get Version
