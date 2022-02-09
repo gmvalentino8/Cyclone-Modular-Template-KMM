@@ -3,8 +3,7 @@ description: 'Configures environment variables for a workflow'
 runs:
   using: "composite"
   steps:
-    - name: Restore cache
-      uses: actions/cache@v2
+    - uses: actions/cache@v2
       with:
         path: ./.github/env/variables.env
         key: ${{ runner.os }}-env
