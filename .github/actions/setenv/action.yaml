@@ -11,7 +11,5 @@ runs:
   using: "composite"
   steps:
     - run: |
-        cd ./.github/env
-        ls
-        cat ${{ inputs.name }}=${{ inputs.value }} >> ./.github/env/variables.env
+        echo ${{ inputs.name }}=${{ inputs.value }} >> ./.github/env/variables.env
       shell: bash
