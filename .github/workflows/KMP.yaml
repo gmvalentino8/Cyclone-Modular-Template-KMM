@@ -1,0 +1,16 @@
+name: Cyklone Modular Template KMM CI
+
+on:
+  pull_request:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update Version
+        run: |
+          export VERSION=$(git fetch --tags --quiet && git describe --tags --always --first-parent)
+          echo "::set-env name=VERSION::$VERSION"
+      - name: Print Version
+        run : echo $VERSION
