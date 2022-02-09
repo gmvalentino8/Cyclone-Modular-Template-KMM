@@ -15,10 +15,12 @@ jobs:
         with:
           name: VERSION
           value: $(git fetch --tags --quiet && git describe --tags --always --first-parent)
+      - name: Cache
   job2:
     needs: setup
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Get Version
         uses: ./.github/actions/getenv
       - name: Print Version

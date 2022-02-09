@@ -13,3 +13,8 @@ runs:
     - run: |
         echo ${{ inputs.name }}=${{ inputs.value }} >> ./.github/env/variables.env
       shell: bash
+    - name: Cache env
+      uses: actions/cache@v2
+      with:
+        path: ./.github/env/variables.env
+        key: ${{ runner.os }}-env
