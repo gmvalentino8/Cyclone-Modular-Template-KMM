@@ -12,7 +12,7 @@ fun Project.setupMavenPublication() {
 
     extensions.getByType<PublishingExtension>().run {
         repositories {
-            maven("${rootProject.rootDir}/artifacts/maven")
+            maven("${rootProject.rootDir}/.artifacts/maven")
         }
     }
 }

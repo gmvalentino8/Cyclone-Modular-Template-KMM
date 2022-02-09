@@ -5,8 +5,13 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun Project.setupMultiplatform(
-    buildTargets: List<BuildTarget> = listOf(BuildTarget.Ios, BuildTarget.Android),
+    vararg buildTargets: BuildTarget = arrayOf(BuildTarget.Android, BuildTarget.Ios),
     publish: Boolean = true,
+) = setupMultiplatform(buildTargets.toList(), publish)
+
+private fun Project.setupMultiplatform(
+    buildTargets: List<BuildTarget>,
+    publish: Boolean,
 ) {
     plugins.apply("kotlin-multiplatform")
 
