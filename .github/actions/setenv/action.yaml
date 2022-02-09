@@ -1,0 +1,20 @@
+name: 'Set environment variables'
+description: 'Configures environment variables for a workflow'
+inputs:
+  name:
+    description: 'Name of the variable'
+    required: true
+  value:
+    description: 'Value of the variable'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        echo ${{ inputs.name }}=${{ inputs.value }} >> ./.github/env/variables.env
+      shell: bash
+    - name: Cache env
+      uses: actions/cache@v2
+      with:
+        path: ./.github/env/variables.env
+        key: ${{ runner.os }}-env
