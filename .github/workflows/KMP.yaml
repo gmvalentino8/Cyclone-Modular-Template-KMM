@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set Version
-        uses: ./.github/actions/set-env
+        uses: ./.github/actions/setenv
         with:
           name: VERSION
           value: $(git fetch --tags --quiet && git describe --tags --always --first-parent)
@@ -19,6 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Version
-        uses: ./.github/actions/get-env
+        uses: ./.github/actions/getenv
       - name: Print Version
         run: echo ${{ env.VERSION }}
