@@ -2,7 +2,11 @@ name: Cyklone Modular Template KMM CI
 
 on:
   pull_request:
+    branches:
+      - '*'
 
+env:
+  VERSION: $(git fetch --tags --quiet && git describe --tags --always --first-parent)
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -10,8 +14,8 @@ jobs:
       version: ${{ steps.GetVersion.outputs.version }}
     steps:
       - uses: actions/checkout@v2
-      - name: Set Version
-        run: echo "VERSION=$(git fetch --tags --quiet && git describe --tags --always --first-parent)" >> $GITHUB_ENV
+      - name: Print Version
+        run : echo ${{ env.VERSION }}
   job2:
     runs-on: ubuntu-latest
     steps:
