@@ -6,11 +6,15 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.GetVersion.outputs.version }}
     steps:
       - uses: actions/checkout@v2
-      - name: Update Version
+      - id: GetVersion
         run: |
-          export VERSION=$(git fetch --tags --quiet && git describe --tags --always --first-parent)
-          echo "::set-env name=VERSION::$VERSION"
+          echo "::set-output name=version::$(git fetch --tags --quiet && git describe --tags --always --first-parent)"
+  job2:
+    runs-on: ubuntu-latest
+    steps:
       - name: Print Version
-        run : echo $VERSION
+        run : echo ${{needs.setup.outputs.version}}
