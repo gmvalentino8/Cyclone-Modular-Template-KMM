@@ -11,6 +11,10 @@ enum class Modules(val path: String) {
     Local(":local"),
     Sample(":features:sample"),
     ;
+
+    companion object {
+        fun ios() = values().filter { it != Test }
+    }
 }
 
 fun KotlinDependencyHandler.project(module: Modules): Dependency? = implementation(project(module.path))

@@ -2,7 +2,7 @@
 .gradle
 /local.properties
 /publish.properties
-/artifacts
+/.artifacts
 /.idea
 .DS_Store
 /build
